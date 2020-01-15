@@ -14,7 +14,7 @@ export default () => {
 			role="heading"
       onclick=${incrementColor}
     >
-      tram-notes
+      sharp-notes
     </h1>
   `
 }

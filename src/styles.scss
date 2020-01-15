@@ -1,0 +1,10 @@
+body {
+	font-family: sans-serif;
+}
+
+.Home {
+	display: grid;
+	grid-template-areas:
+		"header header"
+		"nav note";
+}
