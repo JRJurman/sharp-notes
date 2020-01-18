@@ -23,10 +23,19 @@ export default () => {
 		await set(NOTES_STORE_KEY, notesToSave)
 	}
 
+	const deleteNote = async noteIndex => {
+		// remove note from array
+		notes.splice(noteIndex, 1)
+
+		// save other notes back to the indexedDB
+		const notesToSave = notes.map(objectToNote)
+		await set(NOTES_STORE_KEY, notesToSave)
+	}
+
 	const createNewNote = () => {
 		notes.push(noteToObject(newNote))
 		selectNote(notes.length - 1)
 	}
 
-	return { notes, selectedNote, selectedFilter, updateNote, saveNote, createNewNote, selectNote, selectFilter }
+	return { notes, selectedNote, selectedFilter, updateNote, saveNote, deleteNote, createNewNote, selectNote, selectFilter }
 }

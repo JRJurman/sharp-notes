@@ -8,12 +8,16 @@ const html = registerHtml({
 })
 
 export default () => {
-	const { notes, selectNote } = useNotes()
-	const titles = notes.map(note => note.title)
+	const { notes, selectedFilter, selectNote } = useNotes()
 
-	const titleNavItems = titles.map((title, noteIndex) => {
+	const noteHasFilter = note => note.filters.includes(selectedFilter) || selectedFilter === '*'
+
+	const filteredNotes = notes.map(note => ({ ...note, display: noteHasFilter(note) }))
+
+	const titleNavItems = filteredNotes.map((note, noteIndex) => {
+		if (!note.display) return ''
 		const onSelectNote = () => selectNote(noteIndex)
-		return html`<NavItem onclick=${onSelectNote}>${title}</NavItem>`
+		return html`<NavItem onclick=${onSelectNote}>${note.title}</NavItem>`
 	})
 
 	return html`

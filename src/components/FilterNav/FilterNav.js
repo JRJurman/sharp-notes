@@ -21,8 +21,10 @@ export default () => {
 		return html`<NavItem onclick=${onSelectFilter} indent=${filterLength / 2}>${filterWithoutParent}</NavItem>`
 	})
 
+	const onSelectAll = () => selectFilter('*')
 	return html`
     <div class="FilterNav">
+			<NavItem onclick=${onSelectAll}>All Notes</NavItem>
 			${filterLinks}
     </div>
   `
