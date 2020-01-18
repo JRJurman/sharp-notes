@@ -16,8 +16,8 @@ const home = () => {
 	return html`
     <div class="Home">
       <FilterNav />
-			<NoteNav />
 			<NoteArea />
+			<NoteNav />
     </div>
   `
 }

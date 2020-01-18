@@ -30,12 +30,11 @@ export default () => {
 			selectNote(noteIndex)
 		}
 
-		return html`<NavItem onclick=${onSelectNote}>${note.title}</NavItem>`
+		return html`<NavItem onclick=${onSelectNote}>${note.queuedNote}</NavItem>`
 	})
 
 	return html`
     <div class="NoteNav">
-			Notes
 			${titleNavItems}
 			<NavItem class="NavAction" onclick=${createNewNote}>+</NavItem>
     </div>
