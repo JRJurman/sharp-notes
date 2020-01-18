@@ -1,3 +1,16 @@
+@import '../../colors.scss';
+
 .NoteArea {
 	grid-area: note-area;
+	background: $background-color;
+	border: 1px solid $border-color;
+	border-radius: 20px;
+	padding: 10px;
+	margin: 10px;
+	color: $text-color;
+
+	&:focus {
+		outline: none;
+		border-color: $border-selected-color;
+	}
 }

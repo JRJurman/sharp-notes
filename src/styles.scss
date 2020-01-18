@@ -1,5 +1,9 @@
+@import './colors.scss';
+
 body {
 	font-family: sans-serif;
+	background: $background-color;
+	color: $text-color;
 }
 
 .Home {
