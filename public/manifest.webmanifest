@@ -1,0 +1,9 @@
+{
+  "name": "#SharpNotes",
+  "short_name": "#SharpNotes",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#212533",
+  "orientation": "any",
+  "description": ""
+}
