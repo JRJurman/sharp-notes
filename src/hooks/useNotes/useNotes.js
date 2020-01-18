@@ -1,21 +1,32 @@
 import { useGlobalObservable } from 'tram-one'
-import { parseNoteForExpandedFolder } from '../../filter-utilities'
-import mockNotes from './mockNotes'
+import { set } from 'idb-keyval'
+import { NOTES_OBSERVABLE, NOTES_STORE_KEY, NOTES_SELECTED_NOTE, NOTES_SELECTED_FILTER } from './globalKeys'
+import { objectToNote, noteToObject } from './noteObjectMapping'
+import { newNote } from './defaultNotes'
 
-// test with a single hook
-export const useNotes = () => {
-	const noteObjects = mockNotes.map(note => ({
-		savedNote: note,
-		queuedNote: note,
-		folders: parseNoteForExpandedFolder(note)
-	}))
+export default () => {
+	const [notes] = useGlobalObservable(NOTES_OBSERVABLE, [])
+	const [selectedNote, selectNote] = useGlobalObservable(NOTES_SELECTED_NOTE, 0)
+	const [selectedFilter, selectFilter] = useGlobalObservable(NOTES_SELECTED_FILTER, '*')
 
-	const [notes] = useGlobalObservable('notes', noteObjects)
+	const updateNote = newNote => {
+		notes[selectedNote].queuedNote = newNote
 
-	const updateNote = (noteIndex, newNote) => {
-		notes[noteIndex].queuedNote = newNote
-		notes[noteIndex].folders = parseNoteForExpandedFolder(newNote)
+		const newNoteObject = noteToObject(newNote)
+		notes[selectedNote].title = newNoteObject.title
+		notes[selectedNote].filters = newNoteObject.filters
 	}
 
-	return { notes, updateNote }
+	const saveNote = async () => {
+		notes[selectedNote].savedNote = notes[selectedNote].queuedNote
+		const notesToSave = notes.map(objectToNote)
+		await set(NOTES_STORE_KEY, notesToSave)
+	}
+
+	const createNewNote = () => {
+		notes.push(noteToObject(newNote))
+		selectNote(notes.length - 1)
+	}
+
+	return { notes, selectedNote, selectedFilter, updateNote, saveNote, createNewNote, selectNote, selectFilter }
 }

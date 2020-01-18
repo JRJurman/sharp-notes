@@ -5,6 +5,7 @@ body {
 .Home {
 	display: grid;
 	grid-template-areas:
-		"header header"
-		"nav note";
+		"header header header"
+		"app-controls app-controls app-controls"
+		"filter-nav note-nav note-area";
 }

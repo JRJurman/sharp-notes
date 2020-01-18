@@ -1,16 +1,16 @@
-// 'This note is my first #test/note/folder I think it is great!' => '#test/note/folder'
+// 'This note is my first #test/note/filter I think it is great!' => '#test/note/filter'
 export const parseNoteForHashes = note => note.match(/#(\S*)/g) || []
 
-// #test/note/folder => ['test', 'note', 'folder']
-export const parseHashForFolder = hashString => (hashString.split('#')[1] || '').split('/')
+// #test/note/filter => ['test', 'note', 'filter']
+export const parseHashForFilter = hashString => (hashString.split('#')[1] || '').split('/')
 
-// ['test', 'note', 'folder'] => ['test', 'test/note', 'test/note/folder']
-export const expandFolder = folder => folder.map((label, labelIndex) => folder.slice(0, labelIndex + 1).join('/'))
+// ['test', 'note', 'filter'] => ['test', 'test/note', 'test/note/filter']
+export const expandFilter = filter => filter.map((label, labelIndex) => filter.slice(0, labelIndex + 1).join('/'))
 
-// 'This note is my first #test/note/folder' => ['test', 'test/note', 'test/note/folder']
-export const parseNoteForExpandedFolder = note => {
+// 'This note is my first #test/note/filter' => ['test', 'test/note', 'test/note/filter']
+export const parseNoteForExpandedFilter = note => {
 	const hashes = parseNoteForHashes(note)
-	const folders = hashes.map(parseHashForFolder)
-	const expandedFolders = folders.flatMap(expandFolder)
-	return expandedFolders
+	const filters = hashes.map(parseHashForFilter)
+	const expandedFilters = filters.flatMap(expandFilter)
+	return expandedFilters
 }

@@ -1,26 +1,29 @@
 import { registerHtml } from 'tram-one'
-import { useNotes } from '../../hooks/useNotes'
+import useNotes from '../../hooks/useNotes'
+import NavItem from '../NavItem'
 import './FilterNav.scss'
 
-const html = registerHtml()
+const html = registerHtml({
+	NavItem
+})
 
 export default () => {
-	const { notes } = useNotes()
-	const { folders } = notes[0]
+	const { notes, selectFilter } = useNotes()
 
-	// remove duplicates
-	const uniqueFolders = [...new Set(folders)]
+	const allFilters = notes.flatMap(note => note.filters)
+	const uniqueFilters = [...new Set(allFilters)]
 
 	// build list of links
-	const folderLinks = uniqueFolders.map(folder => {
-		const folderWithoutParent = folder.split('/').slice(-1)
-		const folderLength = folder.split('/').length
-		return html`<div style="padding-left: ${folderLength / 2}em">${folderWithoutParent}</div>`
+	const filterLinks = uniqueFilters.map(filter => {
+		const onSelectFilter = () => selectFilter(filter)
+		const filterWithoutParent = filter.split('/').slice(-1)
+		const filterLength = filter.split('/').length
+		return html`<NavItem onclick=${onSelectFilter} indent=${filterLength / 2}>${filterWithoutParent}</NavItem>`
 	})
 
 	return html`
     <div class="FilterNav">
-			${folderLinks}
+			${filterLinks}
     </div>
   `
 }
