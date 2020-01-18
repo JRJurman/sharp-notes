@@ -5,12 +5,11 @@ import ColorHeader from './components/ColorHeader'
 import NoteArea from './components/NoteArea'
 import FilterNav from './components/FilterNav'
 import NoteNav from './components/NoteNav'
-import AppControls from './components/AppControls'
 import { useIndexedNotes } from './hooks/useNotes'
 import './styles.scss'
 
 const html = registerHtml({
-	ColorHeader, NoteArea, FilterNav, NoteNav, AppControls
+	ColorHeader, NoteArea, FilterNav, NoteNav
 })
 
 const home = () => {
@@ -18,7 +17,6 @@ const home = () => {
 	return html`
     <div class="Home">
       <ColorHeader />
-			<AppControls />
       <FilterNav />
 			<NoteNav />
 			<NoteArea />
