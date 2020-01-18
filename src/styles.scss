@@ -1,7 +1,6 @@
 @import './colors.scss';
 
 body {
-	font-family: sans-serif;
 	background: $background-color;
 	color: $text-color;
 }
@@ -12,4 +11,9 @@ body {
 	grid-template-areas:
 		"header header header"
 		"filter-nav note-nav note-area";
+}
+
+* {
+	font-family: 'Montserrat', sans-serif;
+	transition: all 0.2s ease;
 }

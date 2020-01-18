@@ -1,5 +1,31 @@
+@import '../../colors.scss';
+
 .FilterNav {
 	grid-area: filter-nav;
 	display: flex;
 	flex-direction: column;
+
+	.NavItem {
+		background-color: $filter-background;
+		color: $text-color;
+		border: 0px;
+		border-radius: 0px;
+		padding: 0.4em;
+		border-radius: 4px;
+		margin: 2px;
+
+		&.SelectedFilter {
+			background-color: $filter-selected-background;
+			// color: $filter-selected-color;
+		}
+
+		&:focus {
+			outline: none;
+			background: $border-selected-color;
+		}
+
+		&:hover {
+			background: $border-selected-color;
+		}
+	}
 }

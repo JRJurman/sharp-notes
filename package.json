@@ -34,8 +34,11 @@
   },
   "xo": {
     "extends": [
-      "tram-one"
-    ]
+			"tram-one"
+		],
+		"rules": {
+			"valid-jsdoc": "off"
+		}
   },
   "devDependencies": {
     "@babel/core": "^7.8.0"
