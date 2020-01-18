@@ -36,7 +36,6 @@ export default () => {
 
 	return html`
     <div class="FilterNav">
-			Filters
 			<NavItem onclick=${onSelectAll}>All Notes</NavItem>
 			${filterLinks}
     </div>
